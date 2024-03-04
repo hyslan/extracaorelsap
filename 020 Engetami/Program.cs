@@ -13,24 +13,25 @@ using Microsoft.VisualBasic.FileIO;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using TransformaOrdemtoCSV;
+using System.Collections.Generic;
 
 namespace _020_Engetami
 {
     public class QuerySql
     {
         public readonly string QueryString;
-        
-        public QuerySql(string query) 
+
+        public QuerySql(string query)
         {
             this.QueryString = query;
         }
 
-        public void ExtracaoOrdem(string query) 
+        public void ExtracaoOrdem(string query)
         {
             string filepath = "C:\\Users\\irgpapais\\Documents\\Valoracao\\pendente_wfm.csv";
-                
+
             // Verifica se o arquivo existe e o exclui
-            if (File.Exists(filepath)) 
+            if (File.Exists(filepath))
             {
                 File.Delete(filepath);
             }
@@ -69,11 +70,11 @@ namespace _020_Engetami
                 adapter.Dispose();
                 parser.Dispose();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error in ExtracaoOrdem: {ex.Message}");
             }
-            
+
         }
     }
     public class ConsultaSap
@@ -133,7 +134,7 @@ namespace _020_Engetami
                 Console.WriteLine("Salvando planilha 020.");
                 frame.SendVKey(11);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Console.WriteLine($"Erro em Extração ExtracaoRelatorioSap: {e.Message}");
             }
@@ -188,27 +189,68 @@ namespace _020_Engetami
     {
         static void Main(string[] args)
         {
-            // Contrato NOVASP
-            string novasp = "4600041302";
+            // Número do Contrato
+            string novaspMLG = "4600041302";
             string gbItaquera = "4600042888";
-            string NorteSul = "4600043760";
+            string NorteSulMLG = "4600043760";
+            string NorteSulMLN = "4600045267";
+            string NorteSulMLN2 = "4600046036";
+            string NorteSulMLQ = "4600043654";
+            string ZCMLN = "4600042975";
+            string RecapeMLN = "4600044787";
+            string RecapeMLQ = "4600044777";
+            string RecapeMLG = "4600044782";
+
+            // UGR
             string mlg = "344";
-            string mln = "340";
+            string mlq = "340";
+            string mln = "348";
 
-            string[] novaspQueries = GenerateQueries("NOVASP", 7);
+            // MLG
+            string[] novaspMLGQueries = GenerateQueries("NOVASP_MLG", 8);
+            string[] NorteSulMLGQueries = GenerateQueries("NORTESUL_MLG", 1);
+            string[] RecapeMLGQueries = GenerateQueries("RECAPE_MLG", 1);
+
+            // MLQ
             string[] gbItaqueraQueries = GenerateQueries("GB_ITAQUERA", 6);
-            string[] NorteSulQueries = GenerateQueries("NORTESUL", 1);
+            string[] NorteSulMLQQueries = GenerateQueries("NORTESUL_MLQ", 1);
+            string[] RecapeMLQQueries = GenerateQueries("RECAPE_MLQ", 1);
 
-            QuerySql[] novaspSqlQueries = InitializeQueries(novaspQueries);
+            // MLN
+            string[] ZCMLNQueries = GenerateQueries("ZC_MLN", 9);
+            string[] NorteSulMLNQueries = GenerateQueries("NORTESUL_MLN", 1);
+            string[] NorteSulMLN2Queries = GenerateQueries("NORTESUL_MLN2", 1);
+            string[] RecapeMLNQueries = GenerateQueries("RECAPE_MLN", 2);
+
+            QuerySql[] novaspSqlMLGQueries = InitializeQueries(novaspMLGQueries);
+            QuerySql[] RecapeSqlMLGQueries = InitializeQueries(RecapeMLGQueries);
+            QuerySql[] NorteSulSqlMLGQueries = InitializeQueries(NorteSulMLGQueries);
+
             QuerySql[] gbItaqueraSqlQueries = InitializeQueries(gbItaqueraQueries);
-            QuerySql[] NorteSulSqlQueries = InitializeQueries(NorteSulQueries);
+            QuerySql[] NorteSulSqlMLQQueries = InitializeQueries(NorteSulMLQQueries);
+            QuerySql[] RecapeSqlMLQQueries = InitializeQueries(RecapeMLQQueries);
+
+            QuerySql[] ZCSqlMLNQueries = InitializeQueries(ZCMLNQueries);
+            QuerySql[] NorteSulSqlMLNQueries = InitializeQueries(NorteSulMLNQueries);
+            QuerySql[] NorteSulSqlMLN2Queries = InitializeQueries(NorteSulMLN2Queries);
+            QuerySql[] RecapeSqlMLNQueries = InitializeQueries(RecapeMLNQueries);
 
             ConsultaSap sap = new ConsultaSap();
             try
             {
-                ProcessQueriesAndSap(novaspSqlQueries, sap, mlg, novasp);
-                ProcessQueriesAndSap(gbItaqueraSqlQueries, sap, mln, gbItaquera);
-                ProcessQueriesAndSap(NorteSulSqlQueries, sap, mlg, NorteSul);
+                ProcessQueriesAndSap(novaspSqlMLGQueries, sap, mlg, novaspMLG, "NOVASP - MLG");
+                ProcessQueriesAndSap(RecapeSqlMLGQueries, sap, mlg, RecapeMLG, "Recape - MLG");
+                ProcessQueriesAndSap(NorteSulSqlMLGQueries, sap, mlg, NorteSulMLG, "NorteSUL - MLG");
+
+                ProcessQueriesAndSap(gbItaqueraSqlQueries, sap, mlq, gbItaquera, "GB Itaquera - MLQ");
+                ProcessQueriesAndSap(RecapeSqlMLQQueries, sap, mlq, RecapeMLQ, "Recape - MLQ");
+                ProcessQueriesAndSap(NorteSulSqlMLQQueries, sap, mlq, NorteSulMLQ, "NorteSUl - MLQ");
+
+                ProcessQueriesAndSap(ZCSqlMLNQueries, sap, mln, ZCMLN, "ZC - MLN");
+                ProcessQueriesAndSap(RecapeSqlMLNQueries, sap, mln, RecapeMLN, "Recape - MLN");
+                ProcessQueriesAndSap(NorteSulSqlMLNQueries, sap, mln, NorteSulMLN, "NorteSul - MLN");
+                ProcessQueriesAndSap(NorteSulSqlMLN2Queries, sap, mln, NorteSulMLN2, "NorteSul - MLN");
+
             }
             catch (Exception ex)
             {
@@ -252,7 +294,7 @@ namespace _020_Engetami
                 string caminho017 = "C:\\Users\\irgpapais\\Documents\\Valoracao";
                 sap.ExtracaoRelatorio017Sap(caminho017);
             }
-            
+
         }
         static void KillExcelProcesses()
         {
@@ -283,14 +325,14 @@ namespace _020_Engetami
             return queries.Select(q => new QuerySql(q)).ToArray();
         }
 
-        static void ProcessQueriesAndSap(QuerySql[] queries, ConsultaSap sap, string unadm, string contratada)
+        static void ProcessQueriesAndSap(QuerySql[] queries, ConsultaSap sap, string unadm, string contratada, string nome)
         {
             for (int i = 0; i < queries.Length; i++)
             {
-                Console.Write($"Iniciando consulta no SQL {contratada} parte {i + 1}\n");
+                Console.Write($"Iniciando consulta no SQL {contratada} : {nome} parte {i + 1}\n");
                 queries[i].ExtracaoOrdem(queries[i].QueryString);
-                Console.WriteLine($"Iniciando Processo do Relatório 020 {contratada} no SAP parte {i + 1}\n");
-                sap.ExtracaoRelatorioSap($"020 {contratada} p{i + 1}.XLSX", unadm, contratada);
+                Console.WriteLine($"Iniciando Processo do Relatório 020 {contratada} : {nome} no SAP parte {i + 1}\n");
+                sap.ExtracaoRelatorioSap($"020 {contratada} - {nome} p{i + 1}.XLSX", unadm, contratada);
             }
         }
     }
