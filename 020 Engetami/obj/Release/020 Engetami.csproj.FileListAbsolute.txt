@@ -8,3 +8,13 @@ C:\Users\irgpapais\source\repos\020 Engetami\020 Engetami\obj\Release\020 Engeta
 C:\Users\irgpapais\source\repos\020 Engetami\020 Engetami\obj\Release\020 Engetami.csproj.CoreCompileInputs.cache
 C:\Users\irgpapais\source\repos\020 Engetami\020 Engetami\obj\Release\020 Engetami.exe
 C:\Users\irgpapais\source\repos\020 Engetami\020 Engetami\obj\Release\020 Engetami.pdb
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Release\020 Engetami.csproj.AssemblyReference.cache
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Release\Interop.SAPFEWSELib.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Release\Interop.SapROTWr.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Release\020 Engetami.csproj.ResolveComReference.cache
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Release\020 Engetami.csproj.CoreCompileInputs.cache
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Release\020 Engetami.exe
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Release\020 Engetami.pdb
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Release\020 Engetami.exe.config
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Release\020 Engetami.exe
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Release\020 Engetami.pdb

@@ -28,7 +28,7 @@ namespace _020_Engetami
 
         public void ExtracaoOrdem(string query)
         {
-            string filepath = "C:\\Users\\irgpapais\\Documents\\Valoracao\\pendente_wfm.csv";
+            string filepath = Directory.GetCurrentDirectory() + "\\pendente_wfm.csv";
 
             // Verifica se o arquivo existe e o exclui
             if (File.Exists(filepath))
@@ -90,7 +90,7 @@ namespace _020_Engetami
             // Botão Import CSV.
             frame.SendVKey(23);
             GuiTextField csv_path = (GuiTextField)session.FindById("wnd[2]/usr/ctxtDY_PATH");
-            csv_path.Text = "C:\\Users\\irgpapais\\Documents\\Valoracao";
+            csv_path.Text = Directory.GetCurrentDirectory();
             GuiTextField csv_file = (GuiTextField)session.FindById("wnd[2]/usr/ctxtDY_FILENAME");
             csv_file.Text = "pendente_wfm.csv";
             GuiButton btn_import = (GuiButton)session.FindById("wnd[2]/tbar[0]/btn[0]");
@@ -128,7 +128,7 @@ namespace _020_Engetami
                 GuiButton btn_planilha = (GuiButton)session.FindById("wnd[1]/tbar[0]/btn[0]");
                 btn_planilha.Press();
                 GuiTextField planilha_path = (GuiTextField)session.FindById("wnd[1]/usr/ctxtDY_PATH");
-                planilha_path.Text = "C:\\Users\\irgpapais\\Documents\\SAP\\SAP GUI\\020v\\";
+                planilha_path.Text = Directory.GetCurrentDirectory()+"\\Relatorios020\\";
                 GuiTextField planilha_file = (GuiTextField)session.FindById("wnd[1]/usr/ctxtDY_FILENAME");
                 planilha_file.Text = arquivo;
                 Console.WriteLine("Salvando planilha 020.");
@@ -291,8 +291,9 @@ namespace _020_Engetami
 
                 // Encerra os processos do Excel ativos
                 KillExcelProcesses();
-                string caminho017 = "C:\\Users\\irgpapais\\Documents\\Valoracao";
-                sap.ExtracaoRelatorio017Sap(caminho017);
+                // ListaOS entrarár no lugar da 017.
+                //string caminho017 = "C:\\Users\\irgpapais\\Documents\\Valoracao";
+                //sap.ExtracaoRelatorio017Sap(caminho017);
             }
 
         }

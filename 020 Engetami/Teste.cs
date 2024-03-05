@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Data;
-using System.Data.OleDb;
+using System.IO;
 
-namespace _020_Engetami
+namespace Testes
 {
-    internal class Teste
+    class Program
     {
-       OleDbConnection connect = new OleDbConnection($"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=MLG_SPENHA");
-       
+        static void Main(string[] args)
+        {
+            string pastaDeTrabalho = Directory.GetCurrentDirectory();
+            Console.WriteLine("A pasta de trabalho do projeto é: " + pastaDeTrabalho);
+        }
     }
 }
