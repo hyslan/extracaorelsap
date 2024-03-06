@@ -8,13 +8,29 @@ C:\Users\irgpapais\source\repos\020 Engetami\020 Engetami\obj\Debug\020 Engetami
 C:\Users\irgpapais\source\repos\020 Engetami\020 Engetami\obj\Debug\020 Engetami.csproj.CoreCompileInputs.cache
 C:\Users\irgpapais\source\repos\020 Engetami\020 Engetami\obj\Debug\020 Engetami.exe
 C:\Users\irgpapais\source\repos\020 Engetami\020 Engetami\obj\Debug\020 Engetami.pdb
-C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\020 Engetami.exe.config
-C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\020 Engetami.exe
-C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\020 Engetami.pdb
 C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Debug\020 Engetami.csproj.AssemblyReference.cache
 C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Debug\Interop.SAPFEWSELib.dll
 C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Debug\Interop.SapROTWr.dll
 C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Debug\020 Engetami.csproj.ResolveComReference.cache
 C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Debug\020 Engetami.csproj.CoreCompileInputs.cache
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\020 Engetami.exe.config
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\020 Engetami.exe
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\020 Engetami.pdb
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\EPPlus.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\EPPlus.Interfaces.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\EPPlus.System.Drawing.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.Buffers.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.Memory.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\EPPlus.xml
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.Buffers.xml
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.Memory.xml
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Debug\020 Enge.A6E17CD8.Up2Date
 C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Debug\020 Engetami.exe
 C:\Users\irgpapais\Documents\Meus Projetos\extracaorelsap\020 Engetami\obj\Debug\020 Engetami.pdb

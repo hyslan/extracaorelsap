@@ -11,7 +11,6 @@ using System.IO;
 using System.Diagnostics;
 using Microsoft.VisualBasic.FileIO;
 using Excel = Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Excel;
 using TransformaOrdemtoCSV;
 using System.Collections.Generic;
 
@@ -40,6 +39,7 @@ namespace _020_Engetami
                 SqlConnectionBdMlg connectionObj = new SqlConnectionBdMlg();
                 SqlConnection connect = connectionObj.BD_MLG_Query();
                 SqlCommand command = new SqlCommand(QueryString, connect);
+                command.CommandTimeout = 300;
                 connect.Open();
                 System.Data.DataTable dt = new System.Data.DataTable();
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -174,12 +174,15 @@ namespace _020_Engetami
             GuiButton btn_planilha = (GuiButton)session.FindById("wnd[1]/tbar[0]/btn[0]");
             btn_planilha.Press();
             GuiTextField planilha_path = (GuiTextField)session.FindById("wnd[1]/usr/ctxtDY_PATH");
-            planilha_path.Text = "C:\\Users\\irgpapais\\Documents\\Valoracao\\";
+            planilha_path.Text = Directory.GetCurrentDirectory() + "\\";
             MessageBox.Show("Relatório 017 pronto. Gerar arquivo na transação ZSBPM017.", "Aviso");
-            //GuiTextField planilha_file = (GuiTextField)session.FindById("wnd[1]/usr/ctxtDY_FILENAME");
-            //planilha_file.Text = "017.xlsx";
-            //Console.WriteLine("Salvando planilha 017.");
-            //frame.SendVKey(11);
+            GuiTextField planilha_file = (GuiTextField)session.FindById("wnd[1]/usr/ctxtDY_FILENAME");
+            planilha_file.Text = "017.xlsx";
+            Console.WriteLine("Salvando planilha 017.");
+            GuiButton btn_substituir = (GuiButton)session.FindById("wnd[1]/tbar[0]/btn[11]");
+            btn_substituir.Press();
+            frame.SendVKey(12);
+            frame.SendVKey(12);
         }
     }
 
@@ -207,20 +210,21 @@ namespace _020_Engetami
             string mln = "348";
 
             // MLG
-            string[] novaspMLGQueries = GenerateQueries("NOVASP_MLG", 8);
+            string[] novaspMLGQueries = GenerateQueries("NOVASP_MLG", 1);
             string[] NorteSulMLGQueries = GenerateQueries("NORTESUL_MLG", 1);
             string[] RecapeMLGQueries = GenerateQueries("RECAPE_MLG", 1);
 
             // MLQ
-            string[] gbItaqueraQueries = GenerateQueries("GB_ITAQUERA", 6);
+            string[] novaspMLQQueries = GenerateQueries("NOVASP_MLQ", 1);
+            string[] gbItaqueraQueries = GenerateQueries("GB_ITAQUERA", 1);
             string[] NorteSulMLQQueries = GenerateQueries("NORTESUL_MLQ", 1);
             string[] RecapeMLQQueries = GenerateQueries("RECAPE_MLQ", 1);
 
             // MLN
-            string[] ZCMLNQueries = GenerateQueries("ZC_MLN", 9);
+            string[] ZCMLNQueries = GenerateQueries("ZC_MLN", 1);
             string[] NorteSulMLNQueries = GenerateQueries("NORTESUL_MLN", 1);
             string[] NorteSulMLN2Queries = GenerateQueries("NORTESUL_MLN2", 1);
-            string[] RecapeMLNQueries = GenerateQueries("RECAPE_MLN", 2);
+            string[] RecapeMLNQueries = GenerateQueries("RECAPE_MLN", 1);
 
             QuerySql[] novaspSqlMLGQueries = InitializeQueries(novaspMLGQueries);
             QuerySql[] RecapeSqlMLGQueries = InitializeQueries(RecapeMLGQueries);
@@ -229,6 +233,7 @@ namespace _020_Engetami
             QuerySql[] gbItaqueraSqlQueries = InitializeQueries(gbItaqueraQueries);
             QuerySql[] NorteSulSqlMLQQueries = InitializeQueries(NorteSulMLQQueries);
             QuerySql[] RecapeSqlMLQQueries = InitializeQueries(RecapeMLQQueries);
+            QuerySql[] NovaspSqlMLQQueries = InitializeQueries(novaspMLQQueries);
 
             QuerySql[] ZCSqlMLNQueries = InitializeQueries(ZCMLNQueries);
             QuerySql[] NorteSulSqlMLNQueries = InitializeQueries(NorteSulMLNQueries);
@@ -245,11 +250,12 @@ namespace _020_Engetami
                 ProcessQueriesAndSap(gbItaqueraSqlQueries, sap, mlq, gbItaquera, "GB Itaquera - MLQ");
                 ProcessQueriesAndSap(RecapeSqlMLQQueries, sap, mlq, RecapeMLQ, "Recape - MLQ");
                 ProcessQueriesAndSap(NorteSulSqlMLQQueries, sap, mlq, NorteSulMLQ, "NorteSUl - MLQ");
+                ProcessQueriesAndSap(NovaspSqlMLQQueries, sap, mlq, novaspMLG, "NOVASP - MLQ");
 
                 ProcessQueriesAndSap(ZCSqlMLNQueries, sap, mln, ZCMLN, "ZC - MLN");
                 ProcessQueriesAndSap(RecapeSqlMLNQueries, sap, mln, RecapeMLN, "Recape - MLN");
                 ProcessQueriesAndSap(NorteSulSqlMLNQueries, sap, mln, NorteSulMLN, "NorteSul - MLN");
-                ProcessQueriesAndSap(NorteSulSqlMLN2Queries, sap, mln, NorteSulMLN2, "NorteSul - MLN");
+                ProcessQueriesAndSap(NorteSulSqlMLN2Queries, sap, mln, NorteSulMLN2, "NorteSul - MLN2");
 
             }
             catch (Exception ex)
@@ -268,11 +274,13 @@ namespace _020_Engetami
                 // Tornar o aplicativo Excel invisível
                 excelApp.Visible = false;
 
-                string filepath = "C:\\Users\\irgpapais\\Documents\\Valoracao\\020.XLSX";
+                string filepath = Directory.GetCurrentDirectory() + "\\merged020.xlsx";
+
                 Excel.Workbook wb = excelApp.Workbooks.Open(filepath);
                 wb.RefreshAll();
                 Console.WriteLine("Atualizando Query do Excel...");
                 System.Threading.Thread.Sleep(25000);
+
 
                 Transform020Tocsv csv017 = new Transform020Tocsv(wb);
                 csv017.OrdensemCsv(wb);
@@ -291,9 +299,10 @@ namespace _020_Engetami
 
                 // Encerra os processos do Excel ativos
                 KillExcelProcesses();
-                // ListaOS entrarár no lugar da 017.
-                //string caminho017 = "C:\\Users\\irgpapais\\Documents\\Valoracao";
-                //sap.ExtracaoRelatorio017Sap(caminho017);
+
+                string caminho017 = Directory.GetCurrentDirectory();
+                sap.ExtracaoRelatorio017Sap(caminho017);
+                Console.WriteLine("Processo finalizado.");
             }
 
         }
@@ -314,8 +323,8 @@ namespace _020_Engetami
                 int startLine = i * 25000 + 1;
                 int endLine = (i + 1) * 25000;
 
-                queries[i] = $"SELECT ORDEM FROM [BD_MLG].[LESTE_AD\\hcruz_novasp].[v_Hyslancruz_BEXEC_WFM_Ordens_{prefix}]\n" +
-                              $"WHERE LINHA > {startLine} AND LINHA <= {endLine}\n ORDER BY LINHA ASC";
+                queries[i] = $"SELECT ORDEM FROM [BD_MLG].[LESTE_AD\\hcruz_novasp].[v_Hyslancruz_BEXEC_WFM_Ordens_{prefix}]\n";
+                             // $"WHERE LINHA > {startLine} AND LINHA <= {endLine}\n ORDER BY LINHA ASC";
             }
 
             return queries;

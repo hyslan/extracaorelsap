@@ -30,7 +30,7 @@ namespace TransformaOrdemtoCSV
             // Obter os valores do intervalo em um array bidimensional
             object[,] rangeValues = range.Value;
 
-            string csvFilePath = @"C:\Users\irgpapais\Documents\Valoracao\\017.csv";
+            string csvFilePath = Directory.GetCurrentDirectory() + "\\017.csv";
             // Escrever os valores do array no arquivo CSV
             using (StreamWriter sw = new StreamWriter(csvFilePath))
             {
